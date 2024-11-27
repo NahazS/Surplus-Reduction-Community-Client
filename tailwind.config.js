@@ -14,10 +14,12 @@ export default {
     themes: [
       {
         mytheme: {
-          primary: '#ffffff',
+          "primary": "#404680",
+          "base-100": "#dee5f3",
         },
       },
     ],
+    base: true,
   },
 }
 
