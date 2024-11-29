@@ -38,4 +38,4 @@ const UpdateMyFoodCard = ({food}) => {
   );
 };
 
-export default UpdateMyFoodCard.jsx;
+export default UpdateMyFoodCard;
