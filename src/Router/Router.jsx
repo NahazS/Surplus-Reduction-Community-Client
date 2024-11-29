@@ -8,6 +8,8 @@ import MyFood from '../Pages/MyFood/MyFood';
 import MyFoodRequest from '../Pages/MyFoodRequest/MyFoodRequest';
 import SignIn from '../Pages/Login/SignIn';
 import SignUp from '../Pages/Login/SignUp';
+import axios from 'axios';
+import PrivateRoute from './PrivateRoute';
 
 const Router = createBrowserRouter([
     {
@@ -19,20 +21,21 @@ const Router = createBrowserRouter([
                 element: <Home></Home>
             },
             {
-                path: '/availableFoods',
-                element: <AvailableFoods></AvailableFoods>
+                path: '/availableFood',
+                element: <AvailableFoods></AvailableFoods>,
+                loader: () => fetch('http://localhost:3000/availableFood')
             },
             {
                 path: '/addFood',
-                element: <AddFood></AddFood>
+                element: <PrivateRoute><AddFood></AddFood></PrivateRoute>
             },
             {
                 path: '/myFoods',
-                element: <MyFood></MyFood>
+                element: <PrivateRoute><MyFood></MyFood></PrivateRoute>
             },
             {
                 path: '/myFoodRequest',
-                element: <MyFoodRequest></MyFoodRequest>
+                element: <PrivateRoute><MyFoodRequest></MyFoodRequest></PrivateRoute>
             },
             {
                 path: '/signIn',

@@ -1,79 +1,46 @@
-import React from "react";
-
+import { Link, NavLink } from "react-router-dom";
+import { FiSearch } from "react-icons/fi";
+import { useContext, useState } from "react";
+import { FaUserCircle } from "react-icons/fa";
+import { AuthContext } from "../Provider/AuthProvider";
+import { HiOutlineMenu } from "react-icons/hi";
 const Navbar = () => {
+  const [menu, setMenu] = useState(true)
+  const {user, loading, signOutUser} = useContext(AuthContext)
+  const handleSignOut = () => {
+    if(user){
+      signOutUser()
+        .then(() => console.log("successfully log out"))
+        .catch((error) => console.log(error.message))
+    }
+}
   return (
-    <div className="bg-[#f1f1f1] bg-opacity-50 rounded-2xl">
-      <div className="navbar max-w-[1140px] py-3 mx-auto">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-            >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
+    <div className="bg-[#f1f1f1] bg-opacity-50 text-black text-opacity-75">
+        <div className="flex justify-between items-center py-6 px-5 xl:px-0 xl:max-w-[1170px] mx-auto">
+            <Link className="drop-shadow-2xl font-bold"><h3 className="text-[#575d90] text-2xl">EcoUnity</h3></Link>
+            <ul className="text-lg gap-x-6 hidden md:flex">
+                <li><NavLink to={'/'}>Home</NavLink></li>
+                <li><NavLink to={'/availableFood'}>Available Food</NavLink></li>
+                <li><NavLink to={'/addFood'}>Add Food</NavLink></li>
+                <li><NavLink to={'/myFood'}>My Food</NavLink></li>
             </ul>
-          </div>
-          <a className="btn btn-ghost text-[#575d90] text-xl">daisyUI</a>
+            <div className="flex items-center gap-x-3">
+                <Link to={!user && '/signIn'} onClick={handleSignOut} className="hidden sm:flex px-4 btn rounded-3xl border-none bg-primary text-white hover:shadow-xl active:shadow-inner">{user ? 'Sign Out' : 'Sign in'}</Link>
+                <div>
+                  <button onClick={()=> setMenu(!menu)} className="flex md:hidden px-4 btn rounded-3xl border-none bg-[#90a7b3] hover:shadow-xl active:shadow-inner"><HiOutlineMenu /></button>
+                  <div style={{ zIndex: 50 }} className={`px-6 bg-[#90a7b3] text-center absolute top-20 right-6 rounded-2xl ${menu ? 'hidden' : 'inline-flex'} `}>
+                    <ul className="text-lg gap-x-6">
+                      <li onClick={() => setMenu(true)}><Link to={'/'}>Home</Link></li>
+                      <li onClick={() => setMenu(true)}><Link to={'/availableFood'}>Available Food</Link></li>
+                      <li onClick={() => setMenu(true)}><Link to={'/addFood'}>Add Food</Link></li>
+                      <li onClick={() => setMenu(true)}><Link to={'/myFood'}>My Food</Link></li>
+                      <li className="sm:hidden"><Link to={!user && '/signIn'} onClick={handleSignOut}>{user ? 'Sign Out' : 'Sign in'}</Link></li>
+                    </ul>
+                  </div>
+                </div>
+            </div>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </details>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul>
-        </div>
-        <div className="navbar-end">
-          <a className="btn btn-primary text-white">Button</a>
-        </div>
-      </div>
+        <hr />
     </div>
   );
 };
