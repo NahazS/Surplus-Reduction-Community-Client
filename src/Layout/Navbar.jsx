@@ -23,17 +23,19 @@ const Navbar = () => {
                 <li><NavLink to={'/availableFood'}>Available Food</NavLink></li>
                 <li><NavLink to={'/addFood'}>Add Food</NavLink></li>
                 <li><NavLink to={'/myFood'}>My Food</NavLink></li>
+                <li><NavLink to={'/myFoodRequest'}>My Food Request</NavLink></li>
             </ul>
             <div className="flex items-center gap-x-3">
-                <Link to={!user && '/signIn'} onClick={handleSignOut} className="hidden sm:flex px-4 btn rounded-3xl border-none bg-primary text-white hover:shadow-xl active:shadow-inner">{user ? 'Sign Out' : 'Sign in'}</Link>
+                <Link to={!user && '/signIn'} onClick={handleSignOut} className="hidden sm:flex px-4 btn bg-primary text-white hover:shadow-xl active:shadow-inner">{user ? 'Sign Out' : 'Sign in'}</Link>
                 <div>
-                  <button onClick={()=> setMenu(!menu)} className="flex md:hidden px-4 btn rounded-3xl border-none bg-[#90a7b3] hover:shadow-xl active:shadow-inner"><HiOutlineMenu /></button>
-                  <div style={{ zIndex: 50 }} className={`px-6 bg-[#90a7b3] text-center absolute top-20 right-6 rounded-2xl ${menu ? 'hidden' : 'inline-flex'} `}>
+                  <button onClick={()=> setMenu(!menu)} className="flex md:hidden px-4 btn btn-primary"><HiOutlineMenu /></button>
+                  <div style={{ zIndex: 50 }} className={`px-6 bg-white text-center absolute top-20 right-6 rounded-2xl ${menu ? 'hidden' : 'inline-flex'} `}>
                     <ul className="text-lg gap-x-6">
                       <li onClick={() => setMenu(true)}><Link to={'/'}>Home</Link></li>
                       <li onClick={() => setMenu(true)}><Link to={'/availableFood'}>Available Food</Link></li>
                       <li onClick={() => setMenu(true)}><Link to={'/addFood'}>Add Food</Link></li>
                       <li onClick={() => setMenu(true)}><Link to={'/myFood'}>My Food</Link></li>
+                      <li onClick={() => setMenu(true)}><Link to={'/myFoodRequest'}>My Food Request</Link></li>
                       <li className="sm:hidden"><Link to={!user && '/signIn'} onClick={handleSignOut}>{user ? 'Sign Out' : 'Sign in'}</Link></li>
                     </ul>
                   </div>

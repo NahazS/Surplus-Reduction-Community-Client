@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <div className="text-black text-opacity-75 mt-10 bg-[#f3f7fc] bg-opacity-50">
             <hr />
-            <div className="flex flex-wrap justify-between items-start py-6 max-w-[1170px] mx-auto pt-[145px] pb-[129px]">
+            <div className="flex flex-wrap justify-between items-start py-6 px-5 xl:px-0 max-w-[1140px] mx-auto pt-[145px] pb-[129px]">
                 <div>
                     <Link className="drop-shadow-2xl font-bold"><h3 className="text-[#575d90] text-2xl">EcoUnity</h3></Link>
                     <ul className="leading-[42px]">
@@ -44,7 +44,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="max-w-[350px]">
+                <div className="max-w-[350px] hidden sm:flex sm:flex-col">
                     <h4 className="mb-10">Subscribe</h4>
                     <form className="border-[1px] border-black border-opacity-30 w-fit rounded-3xl pl-[20px] pr-[2px] py-[1px] mb-[42px]">
                         <input className="bg-transparent border-none focus:outline-none" type="text" placeholder="Enter your mail" 

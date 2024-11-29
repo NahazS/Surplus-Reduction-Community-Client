@@ -31,7 +31,7 @@ const AddFood = () => {
     }
     return (
         <div>
-            <div className="min-h-screen px-5 xl:px-0 max-w-[1140px] mx-auto mb-[148px] flex justify-between">
+            <div className="min-h-screen px-5 xl:px-0 max-w-[1140px] mx-auto mb-[148px] flex flex-col xl:flex-row justify-between items-start">
                 <div className="hero-content mx-auto pl-0">
                     <div className="card bg-[#f2f7fd] bg-opacity-60  w-full sm:w-[711px] h-fit px-[30px] py-[15px] md:py-[35px] md:px-[65px] shrink-0 rounded-xl text-center">
                       <h1 className="text-primary text-[40px] font-bold mb-[30px]">Add Food</h1>
@@ -103,7 +103,7 @@ const AddFood = () => {
                       </form>
                     </div>
                 </div>
-                <div className='pt-[50px]'>
+                <div className='pt-[50px] max-w-[350px] mx-auto'>
                 <h1 className="text-primary text-[40px] font-bold text-center">Preview post</h1>
                 <p className='text-black text-opacity-50 text-lg text-center mb-[30px]'>Your post will be displayed like this.</p>
                     <div className="min-w-[350px] h-fit mx-auto rounded-xl shadow-md bg-[#f2f7fd] p-6 border border-gray-200">

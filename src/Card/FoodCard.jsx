@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const FoodCard = ({food}) => {
-    const {foodName, foodImage, quantity, location, expDate, status, notes, donatorName, donatorPhoto} = food
+    const {foodName, foodImage, quantity, location, expDate, status, notes, donatorName, donatorPhoto, _id} = food
     return (
         <div className='group overflow-hidden cursor-pointer'>
         <div className="w-[350px] mx-auto rounded-xl shadow-md bg-[#f2f7fd] p-6 border border-gray-200">
@@ -29,9 +30,9 @@ const FoodCard = ({food}) => {
             </div>
 
             <div className="text-center">
-              <button className="w-full bg-[#404680] hover:bg-[#323464] text-white font-medium py-2 px-4 rounded-lg shadow-md transition">
+              <Link to={`/availableFood/${_id}`}><button className="w-full bg-[#404680] hover:bg-[#323464] text-white font-medium py-2 px-4 rounded-lg shadow-md transition">
                 View Details
-              </button>
+              </button></Link>
             </div>
           </div>
         </div>
