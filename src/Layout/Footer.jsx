@@ -6,7 +6,7 @@ const Footer = () => {
             <hr />
             <div className="flex flex-wrap justify-between items-start py-6 px-5 xl:px-0 max-w-[1140px] mx-auto pt-[145px] pb-[129px]">
                 <div>
-                    <Link className="drop-shadow-2xl font-bold"><h3 className="text-[#575d90] text-2xl">EcoUnity</h3></Link>
+                <Link to={'/'} className="drop-shadow-2xl font-bold flex items-center"><img className="w-7 h-7" src="/logoText.png" alt="" /><h3 className="text-[#575d90] text-2xl">EcoUnity</h3></Link>
                     <ul className="leading-[42px]">
                         <li>eco-unity@support.com</li>
                         <li>+880 1234567890</li>

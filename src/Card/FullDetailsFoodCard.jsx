@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import moment from 'moment';
 import axios from 'axios';
 import { motion, useScroll } from "framer-motion";
 import SignIn from '../Pages/Login/SignIn';
-const FullDetailsFoodCard = ({id}) => {
+import Swal from 'sweetalert2'
+const FullDetailsFoodCard = () => {
+    const {id} = useParams()
+    const navigate = useNavigate()
     const { scrollYProgress } = useScroll();
     const item = useLoaderData()
     const {user} = useContext(AuthContext)
@@ -17,6 +20,26 @@ const FullDetailsFoodCard = ({id}) => {
         const requestDate = e.target.requestDate.value
         axios.post('http://localhost:3000/requestFood',{
             donatorName,donatorEmail,foodName,foodImage,quantity,location,expDate,requestUserName:user.displayName, requestUserEmail:user.email, requestNote:notes, requestDate
+        })
+        .then(res => {
+            if(res.status)
+            {
+                axios.delete(`http://localhost:3000/availableFood/${id}`)
+                .then(res => {
+                    console.log(res)
+                    if(res.data.deletedCount > 0)
+                    {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Add Food Successfully",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        navigate('/myFoodRequest')
+                    }
+                })
+            }
         })
     }
     if(!user)

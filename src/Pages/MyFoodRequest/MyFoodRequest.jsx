@@ -32,7 +32,7 @@ const MyFoodRequest = () => {
         return <Loading></Loading>; 
     }
     return (
-        <div className='px-5 xl:px-0 max-w-[1140px] mx-auto mb-[148px] h-screen'>
+        <div className='px-5 xl:px-0 max-w-[1140px] mx-auto mb-[148px] min-h-screen'>
             <Helmet>
               <meta charSet="utf-8" />
               <title>EcoUnity | My Food Request</title>

@@ -63,7 +63,7 @@ const MyFood = () => {
           });
     }
     return (
-        <div className='px-5 xl:px-0 max-w-[1140px] mx-auto h-screen'>
+        <div className='px-5 xl:px-0 max-w-[1140px] mx-auto min-h-screen'>
             <Helmet>
               <meta charSet="utf-8" />
               <title>EcoUnity | My Food</title>

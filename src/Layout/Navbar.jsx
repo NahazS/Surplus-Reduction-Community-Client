@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <div className="bg-[#f1f1f1] bg-opacity-50 text-black text-opacity-75">
         <div className="flex justify-between items-center py-6 px-5 xl:px-0 xl:max-w-[1170px] mx-auto">
-            <Link className="drop-shadow-2xl font-bold"><h3 className="text-[#575d90] text-2xl">EcoUnity</h3></Link>
+            <Link to={'/'} className="drop-shadow-2xl font-bold flex items-center"><img className="w-7 h-7" src="/logoText.png" alt="" /><h3 className="text-[#575d90] text-2xl">EcoUnity</h3></Link>
             <ul className="text-lg gap-x-6 hidden md:flex">
                 <li><NavLink to={'/'}>Home</NavLink></li>
                 <li><NavLink to={'/availableFood'}>Available Food</NavLink></li>
