@@ -22,7 +22,8 @@ const SignUp = () => {
             })
             .then(() => {
                 setUser(result.user)
-                console.log('update successfully', user)
+                const redirectTo = location.state?.from || '/';
+                navigate(redirectTo)
             })
             .catch(()=> {
                 console.log("problem in update user")
@@ -37,7 +38,8 @@ const SignUp = () => {
         signInGoogle()
         .then(result => {
             setUser(result.user)
-            console.log(result.user)
+            const redirectTo = location.state?.from || '/';
+            navigate(redirectTo)
         })
         .catch(error => {
             console.log(error.message)
@@ -48,7 +50,8 @@ const SignUp = () => {
         signInGithub()
         .then(result => {
             setUser(result.user)
-            console.log(result.user)
+            const redirectTo = location.state?.from || '/';
+            navigate(redirectTo)
         })
         .catch(error => {
             console.log(error.message)

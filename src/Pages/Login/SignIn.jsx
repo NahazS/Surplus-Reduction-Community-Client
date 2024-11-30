@@ -1,10 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiEyeOff, FiEye } from "react-icons/fi";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Helmet } from 'react-helmet';
 const SignIn = () => {
+    const navigate = useNavigate()
+    const location = useLocation()
     const {user, setUser, signInUser, signOutUser, signInGoogle, signInGithub, loading} = useContext(AuthContext)
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -12,7 +14,9 @@ const SignIn = () => {
         const password = e.target.password.value
         signInUser(email, password)
         .then(result => {
-            console.log(result.user)
+            const redirectTo = location.state?.from || '/';
+            console.log(redirectTo)
+            navigate(redirectTo)
             e.target.reset()
         })
         .catch(error => {
@@ -25,7 +29,8 @@ const SignIn = () => {
         signInGoogle()
         .then(result => {
             setUser(result.user)
-            console.log(result.user)
+            const redirectTo = location.state?.from || '/';
+            navigate(redirectTo)
         })
         .catch(error => {
             console.log(error.message)
@@ -36,7 +41,8 @@ const SignIn = () => {
         signInGithub()
         .then(result => {
             setUser(result.user)
-            console.log(result.user)
+            const redirectTo = location.state?.from || '/';
+            navigate(redirectTo)
         })
         .catch(error => {
             console.log(error.message)

@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 import moment from 'moment';
 import axios from 'axios';
 import { motion, useScroll } from "framer-motion";
+import SignIn from '../Pages/Login/SignIn';
 const FullDetailsFoodCard = ({id}) => {
     const { scrollYProgress } = useScroll();
     const item = useLoaderData()
     const {user} = useContext(AuthContext)
     const {donatorName, donatorEmail, foodName, foodImage, quantity, location, expDate, status} = item
-    const [requestButton, setRequest] = useState(false)
+
     const handleRequest = (e) => {
         e.preventDefault()
         const notes = e.target.notes.value
@@ -18,7 +19,12 @@ const FullDetailsFoodCard = ({id}) => {
             donatorName,donatorEmail,foodName,foodImage,quantity,location,expDate,requestUserName:user.displayName, requestUserEmail:user.email, requestNote:notes, requestDate
         })
     }
-
+    if(!user)
+    {
+        return(
+            <SignIn></SignIn>
+        )
+    }
     return (
         <div className="group overflow-hidden cursor-pointer w-full md:w-[650px] px-5 md:px-0 mx-auto my-[100px]">
           <div className="rounded-xl shadow-md bg-[#f2f7fd] p-6 border border-gray-200 ">
@@ -100,7 +106,7 @@ const FullDetailsFoodCard = ({id}) => {
                         <div className="form-control flex flex-col sm:flex-row gap-4">
                           <div className='w-full sm:w-1/2'>
                             <label className="label"><span className="label-text text-[#4d4d4d]">Your Email</span></label>
-                            <input name='userEmail'   type="email" className="input input-bordered bg-white border-none shadow-md w-full" required defaultValue={user.email} disabled
+                            <input name='userEmail'   type="email" className="input input-bordered bg-white border-none shadow-md w-full" required defaultValue={user ? user.email : ''} disabled
                             />
                           </div>
                           <div className='w-full sm:w-1/2'>

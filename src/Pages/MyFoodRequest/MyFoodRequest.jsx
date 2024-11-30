@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import RequestCard from '../../Card/RequestCard';
 import Loading from '../Loading/Loading';
+import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 
 const MyFoodRequest = () => {
     const {user} = useContext(AuthContext)
@@ -30,8 +32,16 @@ const MyFoodRequest = () => {
         return <Loading></Loading>; 
     }
     return (
-        <div>
-            <div className='px-5 xl:px-0 max-w-[1140px] mx-auto'>
+        <div className='px-5 xl:px-0 max-w-[1140px] mx-auto mb-[148px] h-screen'>
+            <Helmet>
+              <meta charSet="utf-8" />
+              <title>EcoUnity | My Food Request</title>
+              <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
+            <div className='text-center bg-[#f3f7fc] shadow-lg w-full md:h-[200px] flex flex-col items-center justify-center rounded-[16px] mt-[30px]'>
+                <h1 className="text-[#575d90] text-[40px] font-bold">My Food Request</h1>
+            </div>
+            <div className=''>
                 <div className="overflow-x-auto">
                     <table className='w-full'>
                         {/* head */}
@@ -50,6 +60,10 @@ const MyFoodRequest = () => {
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div className={`text-center ${requestFood.length > 0 ? 'hidden' : 'flex flex-col'}`}>
+                <p className='text-xl mb-4'>There are currently no items available on the Food Request page. Feel free to add some if you’d like to Request!</p>
+                <Link to={'/availableFood'}><button className='btn btn-primary'>Request Food</button></Link>
             </div>
         </div>
     );
