@@ -12,6 +12,7 @@ import axios from 'axios';
 import PrivateRoute from './PrivateRoute';
 import FullDetailsFoodCard from '../Card/FullDetailsFoodCard';
 import Update from '../Pages/MyFood/Component/Update';
+import Error from '../Pages/Error/Error';
 
 const Router = createBrowserRouter([
     {
@@ -20,42 +21,51 @@ const Router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home></Home>
+                element: <Home></Home>,
+                errorElement: <Error></Error>
             },
             {
                 path: '/availableFood',
                 element: <AvailableFoods></AvailableFoods>,
-                loader: () => fetch('http://localhost:3000/availableFood')
+                loader: () => fetch('http://localhost:3000/availableFood'),
+                errorElement: <Error></Error>
             },
             {
                 path: '/availableFood/:id',
                 element: <FullDetailsFoodCard></FullDetailsFoodCard>,
-                loader: ({params}) => fetch(`http://localhost:3000/availableFood/${params.id}`)
+                loader: ({params}) => fetch(`http://localhost:3000/availableFood/${params.id}`),
+                errorElement: <Error></Error>
             },
             {
                 path: '/addFood',
-                element: <PrivateRoute><AddFood></AddFood></PrivateRoute>
+                element: <PrivateRoute><AddFood></AddFood></PrivateRoute>,
+                errorElement: <Error></Error>
             },
             {
                 path: '/myFood',
-                element: <PrivateRoute><MyFood></MyFood></PrivateRoute>
+                element: <PrivateRoute><MyFood></MyFood></PrivateRoute>,
+                errorElement: <Error></Error>
             },
             {
                 path: '/myFood/:id',
                 element: <PrivateRoute><Update></Update></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:3000/availableFood/${params.id}`)
+                loader: ({params}) => fetch(`http://localhost:3000/availableFood/${params.id}`),
+                errorElement: <Error></Error>
             },
             {
                 path: '/myFoodRequest',
-                element: <PrivateRoute><MyFoodRequest></MyFoodRequest></PrivateRoute>
+                element: <PrivateRoute><MyFoodRequest></MyFoodRequest></PrivateRoute>,
+                errorElement: <Error></Error>
             },
             {
                 path: '/signIn',
-                element: <SignIn></SignIn>
+                element: <SignIn></SignIn>,
+                errorElement: <Error></Error>
             },
             {
                 path: '/signUp',
-                element: <SignUp></SignUp>
+                element: <SignUp></SignUp>,
+                errorElement: <Error></Error>
             }
         ]
     }
