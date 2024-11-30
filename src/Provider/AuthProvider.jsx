@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import React, {createContext, useEffect, useState } from 'react';
 import auth from '../Firebase/firebase.config';
+import axios from 'axios';
 
 export const AuthContext = createContext(null)
 
@@ -27,6 +28,8 @@ const AuthProvider = ({children}) => {
     }
     useEffect(()=> {
         const unSubscribe = onAuthStateChanged(auth, newUser => {
+            const userEmail = newUser?.email || user?.email;
+            const loggedUser = { email: userEmail };
             setUser(newUser)
             setLoading(false)
             if(newUser)
