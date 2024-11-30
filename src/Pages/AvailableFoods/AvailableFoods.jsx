@@ -15,7 +15,7 @@ const AvailableFoods = () => {
         console.log(search)
         if(search)
         {
-            fetch(`http://localhost:3000/availableFood?foodName=${search}`)
+            fetch(`https://food-sharing-community-server-theta.vercel.app/availableFood?foodName=${search}`)
             .then(res => res.json())
             .then(data => setShowFood(data))
         } else{

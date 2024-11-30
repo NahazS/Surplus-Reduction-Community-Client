@@ -27,7 +27,7 @@ const AddFood = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:3000/availableFood', {
+        axios.post('https://food-sharing-community-server-theta.vercel.app/availableFood', {
             donatorName:user.displayName, donatorEmail:user.email, donatorPhoto:user.photoURL, foodName, foodImage, quantity, location, expDate, status, notes, addedTime:moment().format('L,LTS')
         })
         .then(res => {

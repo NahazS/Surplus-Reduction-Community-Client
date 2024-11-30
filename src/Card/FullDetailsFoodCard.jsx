@@ -18,13 +18,13 @@ const FullDetailsFoodCard = () => {
         e.preventDefault()
         const notes = e.target.notes.value
         const requestDate = e.target.requestDate.value
-        axios.post('http://localhost:3000/requestFood',{
+        axios.post('https://food-sharing-community-server-theta.vercel.app/requestFood',{
             donatorName,donatorEmail,foodName,foodImage,quantity,location,expDate,requestUserName:user.displayName, requestUserEmail:user.email, requestNote:notes, requestDate
         })
         .then(res => {
             if(res.status)
             {
-                axios.delete(`http://localhost:3000/availableFood/${id}`)
+                axios.delete(`https://food-sharing-community-server-theta.vercel.app/availableFood/${id}`)
                 .then(res => {
                     console.log(res)
                     if(res.data.deletedCount > 0)

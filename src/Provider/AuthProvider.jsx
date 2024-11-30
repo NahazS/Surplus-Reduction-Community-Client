@@ -34,11 +34,11 @@ const AuthProvider = ({children}) => {
             setLoading(false)
             if(newUser)
             {
-                axios.post('http://localhost:3000/jwt',loggedUser, { withCredentials: true })
+                axios.post('https://food-sharing-community-server-theta.vercel.app/jwt',loggedUser, { withCredentials: true })
                 .then(res => console.log(res.data))
             } 
             else{
-                axios.post('http://localhost:3000/logOut', loggedUser, {withCredentials: true})
+                axios.post('https://food-sharing-community-server-theta.vercel.app/logOut', loggedUser, {withCredentials: true})
                 .then(res => console.log(res.data))
             }
         })

@@ -10,7 +10,7 @@ const MyFoodRequest = () => {
     const [error, setError] = useState(null);
     const [requestFood, setRequestFood] = useState(null)
     useEffect(() => {
-        fetch(`http://localhost:3000/requestFood?requestUserEmail=${user.email}`, {credentials: 'include'})
+        fetch(`https://food-sharing-community-server-theta.vercel.app/requestFood?requestUserEmail=${user.email}`, {credentials: 'include'})
         .then(res => res.json())
         .then(data => {
             if(data.length > 0)

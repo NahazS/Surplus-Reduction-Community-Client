@@ -18,7 +18,7 @@ const Update = () => {
         const status = e.target.status.value
         const notes = e.target.notes.value
         const addedTime = moment().format('L,LTS')
-        axios.put(`http://localhost:3000/availableFood/${_id}`,{
+        axios.put(`https://food-sharing-community-server-theta.vercel.app/availableFood/${_id}`,{
           foodName,
           foodImage,
           quantity,

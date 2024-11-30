@@ -12,7 +12,7 @@ const MyFood = () => {
     const [error, setError] = useState(null);
     const [addedFood, setAddedFood] = useState(null)
     useEffect(() => {
-        fetch(`http://localhost:3000/availableFood?donatorEmail=${user.email}`, {credentials: 'include'})
+        fetch(`https://food-sharing-community-server-theta.vercel.app/availableFood?donatorEmail=${user.email}`, {credentials: 'include'})
         .then(res => res.json())
         .then(data => {
             if(data.length > 0)
@@ -47,7 +47,7 @@ const MyFood = () => {
             confirmButtonText: "Yes, delete it!"
           }).then((result) => {
             if (result.isConfirmed) {
-              axios.delete(`http://localhost:3000/availableFood/${id}`)
+              axios.delete(`https://food-sharing-community-server-theta.vercel.app/availableFood/${id}`)
               .then(res => {
                 if(res.data.deletedCount > 0) {
                     Swal.fire({

@@ -22,19 +22,19 @@ const Router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: () => fetch('http://localhost:3000/availableFood'),
+                loader: () => fetch('https://food-sharing-community-server-theta.vercel.app/availableFood'),
                 errorElement: <Error></Error>
             },
             {
                 path: '/availableFood',
                 element: <AvailableFoods></AvailableFoods>,
-                loader: () => fetch('http://localhost:3000/availableFood'),
+                loader: () => fetch('https://food-sharing-community-server-theta.vercel.app/availableFood'),
                 errorElement: <Error></Error>
             },
             {
                 path: '/availableFood/:id',
                 element: <FullDetailsFoodCard></FullDetailsFoodCard>,
-                loader: ({params}) => fetch(`http://localhost:3000/availableFood/${params.id}`),
+                loader: ({params}) => fetch(`https://food-sharing-community-server-theta.vercel.app/availableFood/${params.id}`),
                 errorElement: <Error></Error>
             },
             {
@@ -50,7 +50,7 @@ const Router = createBrowserRouter([
             {
                 path: '/myFood/:id',
                 element: <PrivateRoute><Update></Update></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:3000/availableFood/${params.id}`),
+                loader: ({params}) => fetch(`https://food-sharing-community-server-theta.vercel.app/availableFood/${params.id}`),
                 errorElement: <Error></Error>
             },
             {
