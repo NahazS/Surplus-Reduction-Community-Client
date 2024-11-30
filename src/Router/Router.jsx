@@ -11,6 +11,7 @@ import SignUp from '../Pages/Login/SignUp';
 import axios from 'axios';
 import PrivateRoute from './PrivateRoute';
 import FullDetailsFoodCard from '../Card/FullDetailsFoodCard';
+import Update from '../Pages/MyFood/Component/Update';
 
 const Router = createBrowserRouter([
     {
@@ -38,6 +39,11 @@ const Router = createBrowserRouter([
             {
                 path: '/myFood',
                 element: <PrivateRoute><MyFood></MyFood></PrivateRoute>
+            },
+            {
+                path: '/myFood/:id',
+                element: <PrivateRoute><Update></Update></PrivateRoute>,
+                loader: ({params}) => fetch(`http://localhost:3000/availableFood/${params.id}`)
             },
             {
                 path: '/myFoodRequest',

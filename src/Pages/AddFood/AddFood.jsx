@@ -98,7 +98,7 @@ const AddFood = () => {
                           />
                         </div>
                         <div className="form-control mt-6">
-                          <button className="btn bg-primary text-white hover:text-black">Sign Up</button>
+                          <button className="btn bg-primary text-white hover:text-black">Add</button>
                         </div>
                       </form>
                     </div>

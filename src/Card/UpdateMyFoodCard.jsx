@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const UpdateMyFoodCard = ({food}) => {
-  const {donatorName, donatorEmail, donatorPhoto, foodName, foodImage, quantity, location, expDate, status, notes, addedTime} = food
+  const {_id,donatorName, donatorEmail, donatorPhoto, foodName, foodImage, quantity, location, expDate, status, notes, addedTime} = food
   return (
     <div>
       <tr className="bg-[#f3f7fc] bg-opacity-50 flex flex-col sm:flex-row justify-between mb-[28px] items-center px-4 py-4 h-fit w-full rounded-lg shadow-md hover:shadow-lg">
@@ -30,7 +31,7 @@ const UpdateMyFoodCard = ({food}) => {
             </div>
         </td>
         <td>
-          <button className="btn bg-primary text-white hover:text-black">Update</button>
+          <Link to={`/myFood/${_id}`}><button className="btn bg-primary text-white hover:text-black">Update</button></Link>
           <button className="btn bg-primary text-white hover:text-black">Delete</button>
         </td>
       </tr>

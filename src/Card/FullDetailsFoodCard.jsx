@@ -9,7 +9,7 @@ const FullDetailsFoodCard = ({id}) => {
     const item = useLoaderData()
     const {user} = useContext(AuthContext)
     const {donatorName, donatorEmail, foodName, foodImage, quantity, location, expDate, status} = item
-
+    const [requestButton, setRequest] = useState(false)
     const handleRequest = (e) => {
         e.preventDefault()
         const notes = e.target.notes.value
