@@ -12,7 +12,7 @@ const MyFood = () => {
     const [error, setError] = useState(null);
     const [addedFood, setAddedFood] = useState(null)
     useEffect(() => {
-        fetch(`http://localhost:3000/availableFood?donatorEmail=${user.email}`)
+        fetch(`http://localhost:3000/availableFood?donatorEmail=${user.email}`, {credentials: 'include'})
         .then(res => res.json())
         .then(data => {
             if(data.length > 0)

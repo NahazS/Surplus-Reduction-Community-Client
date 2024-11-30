@@ -63,7 +63,7 @@ const SignIn = () => {
         e.preventDefault()
         setShowPassword(!showPassword)
     }
-    return (
+    return ( loading ? <h1>nahaz</h1> :
         <div className="min-h-screen px-5 xl:px-0 max-w-[1140px] mx-auto">
           <Helmet>
               <meta charSet="utf-8" />
