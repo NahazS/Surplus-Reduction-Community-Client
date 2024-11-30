@@ -30,7 +30,7 @@ const FoodCard = ({food}) => {
             </div>
 
             <div className="text-center">
-              <Link to={`/availableFood/${_id}`}><button className="w-full bg-[#404680] hover:bg-[#323464] text-white font-medium py-2 px-4 rounded-lg shadow-md transition">
+              <Link to={`/availableFood/${_id}`}><button disabled={status !== 'available'} className="w-full bg-[#404680] hover:bg-[#323464] text-white font-medium py-2 px-4 rounded-lg shadow-md transition">
                 View Details
               </button></Link>
             </div>

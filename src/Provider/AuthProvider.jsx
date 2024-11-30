@@ -29,6 +29,15 @@ const AuthProvider = ({children}) => {
         const unSubscribe = onAuthStateChanged(auth, newUser => {
             setUser(newUser)
             setLoading(false)
+            if(newUser)
+            {
+                axios.post('http://localhost:3000/jwt',loggedUser, { withCredentials: true })
+                .then(res => console.log(res.data))
+            } 
+            else{
+                axios.post('http://localhost:3000/logOut', loggedUser, {withCredentials: true})
+                .then(res => console.log(res.data))
+            }
         })
         return () => {unSubscribe}
     },[])
