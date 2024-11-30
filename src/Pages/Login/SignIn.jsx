@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiEyeOff, FiEye } from "react-icons/fi";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { AuthContext } from '../../Provider/AuthProvider';
+import { Helmet } from 'react-helmet';
 const SignIn = () => {
     const {user, setUser, signInUser, signOutUser, signInGoogle, signInGithub, loading} = useContext(AuthContext)
     const handleSubmit = (e) => {
@@ -58,6 +59,11 @@ const SignIn = () => {
     }
     return (
         <div className="min-h-screen px-5 xl:px-0 max-w-[1140px] mx-auto">
+          <Helmet>
+              <meta charSet="utf-8" />
+              <title>EcoUnity | Sign In</title>
+              <link rel="canonical" href="http://mysite.com/example" />
+          </Helmet>
           <div className="hero-content mx-auto">
             <div className="card bg-[#f2f7fd]  w-full sm:w-[511px] h-fit px-[30px] py-[15px] md:py-[35px] md:px-[65px] shrink-0 rounded-xl text-center">
               <h1 className="text-primary text-[40px] font-bold mb-[50px]">Login</h1>

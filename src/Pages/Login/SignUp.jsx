@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { updateProfile } from 'firebase/auth';
 import auth from '../../Firebase/firebase.config';
+import { Helmet } from 'react-helmet';
 const SignUp = () => {
     const {user, setUser, signUpUser, signInGoogle, signInGithub,loading} = useContext(AuthContext)
     const handleSubmit = (e) => {
@@ -56,6 +57,11 @@ const SignUp = () => {
     return ( loading ? <img className='flex mx-auto' src="/loading.gif" alt="" /> :
 
             <div className="min-h-screen px-5 xl:px-0 max-w-[1140px] mx-auto">
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>EcoUnity | Sign Up</title>
+                    <link rel="canonical" href="http://mysite.com/example" />
+                </Helmet>
                 <div className="hero-content mx-auto">
                     <div className="card bg-[#f2f7fd]  w-full sm:w-[511px] h-fit px-[30px] py-[15px] md:py-[35px] md:px-[65px] shrink-0 rounded-xl text-center">
                       <h1 className="text-primary text-[40px] font-bold mb-[30px]">Sign Up</h1>

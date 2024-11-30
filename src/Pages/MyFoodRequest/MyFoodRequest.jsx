@@ -6,11 +6,18 @@ import Loading from '../Loading/Loading';
 const MyFoodRequest = () => {
     const {user} = useContext(AuthContext)
     const [error, setError] = useState(null);
-    const [requestFood, setRequestFood] = useState([])
+    const [requestFood, setRequestFood] = useState(null)
     useEffect(() => {
         fetch(`http://localhost:3000/requestFood?requestUserEmail=${user.email}`)
         .then(res => res.json())
-        .then(data => setRequestFood(data))
+        .then(data => {
+            if(data.length > 0)
+            {
+                setRequestFood(data)
+            } else{
+                setRequestFood([])
+            }
+        })
         .catch(err => {
             console.log(err)
             setError(err.message)

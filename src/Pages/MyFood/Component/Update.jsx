@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import axios from "axios";
 import moment from 'moment';
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 const Update = () => {
     const food = useLoaderData()
+    const navigate = useNavigate()
     const {_id,donatorName, donatorEmail, donatorPhoto, foodName, foodImage, quantity, location, expDate, status, notes, addedTime} = food
     console.log(_id)
     const handleSubmit = (e) => {
@@ -26,11 +28,25 @@ const Update = () => {
           notes,
           addedTime
         })
+        .then(res => {
+            if(res.data.modifiedCount)
+            {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Your work has been saved",
+                    background: "#ffffff",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                navigate('/myFood')
+            }
+        })
     }
     return (
         <div>
             <div className="hero-content mx-auto pl-0">
-                <div className="card bg-[#f2f7fd] w-full sm:w-[711px] h-fit px-[30px] py-[15px] md:py-[35px] md:px-[65px] shrink-0 rounded-xl text-center overflow-auto">
+                <div className="card bg-[#f2f7fd] w-full sm:w-[711px] h-[700px] px-[30px] py-[15px] md:py-[35px] md:px-[65px] shrink-0 rounded-xl text-center overflow-auto">
                     <h1 className="text-primary text-[40px] font-bold mb-[30px]">Update Food</h1>
                     <form onSubmit={handleSubmit}>
                       <div className="form-control flex flex-col sm:flex-row gap-4">

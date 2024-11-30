@@ -2,8 +2,11 @@ import React, { useContext, useRef, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import axios from 'axios';
 import moment from 'moment';
-
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 const AddFood = () => {
+    const navigate = useNavigate()
     const {user, loading} = useContext(AuthContext)
     const [foodName, setFoodName] = useState('Food Name')
     const [foodImage, setFoodImage] = useState('/foodPhotoUpload.png')
@@ -27,10 +30,28 @@ const AddFood = () => {
         axios.post('http://localhost:3000/availableFood', {
             donatorName:user.displayName, donatorEmail:user.email, donatorPhoto:user.photoURL, foodName, foodImage, quantity, location, expDate, status, notes, addedTime:moment().format('L,LTS')
         })
+        .then(res => {
+            if(res.request.status === 200)
+            {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Your work has been saved",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate('/availableFood')
+            }
+        })
         e.target.reset()
     }
     return (
         <div>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>EcoUnity | AddFood</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
             <div className="min-h-screen px-5 xl:px-0 max-w-[1140px] mx-auto mb-[148px] flex flex-col xl:flex-row justify-between items-start">
                 <div className="hero-content mx-auto pl-0">
                     <div className="card bg-[#f2f7fd] bg-opacity-60  w-full sm:w-[711px] h-fit px-[30px] py-[15px] md:py-[35px] md:px-[65px] shrink-0 rounded-xl text-center">

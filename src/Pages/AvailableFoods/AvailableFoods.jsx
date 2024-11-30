@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import FoodCard from '../../Card/FoodCard';
+import Loading from '../Loading/Loading';
+import { Helmet } from 'react-helmet';
 
 const AvailableFoods = () => {
     const allFood = useLoaderData()
@@ -20,6 +22,9 @@ const AvailableFoods = () => {
             setShowFood(allFood)
         }
     }
+    if(!showFood){
+        return <Loading></Loading>
+    }
     const handleSort = () => {
         const sortType = sortRef.current.value
         let sort = []
@@ -34,10 +39,15 @@ const AvailableFoods = () => {
     }
     return (
         <div className='min-h-screen px-5 xl:px-0 max-w-[1140px] mx-auto mb-[148px]'>
-            <div className='text-center bg-[#f3f7fc] shadow-lg w-full h-[200px] flex flex-col items-center justify-center rounded-[16px] mt-[30px]'>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>EcoUnity | AvailableFood</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
+            <div className='text-center bg-[#f3f7fc] shadow-lg w-full h-fit md:h-[200px] flex flex-col items-center justify-center rounded-[16px] mt-[30px]'>
                 <h1 className="text-[#575d90] text-[40px] font-bold">Search for Food</h1>
-                <div className='flex shadow-md w-1/2'>
-                    <div className='w-[150px]'>
+                <div className='flex flex-col gap-y-2 md:flex-row shadow-md w-full md:w-1/2'>
+                    <div className='w-full md:w-[150px] p-4 md:p-0'>
                         <select onChange={handleSort} ref={sortRef} className="select bg-white rounded-r-none w-full border-none focus:outline-none">
                           <option disabled selected>Sort</option>
                           <option>Added first</option>
@@ -45,11 +55,21 @@ const AvailableFoods = () => {
                         </select>
                     </div>
                     <hr />
-                    <div className='w-[600px]'>
+                    {/* for bigger device */}
+                    <div className='w-[600px] hidden md:flex'>
                         <input ref={searchRef} name='name' type="text" placeholder="Name" className="input input-bordered bg-white border-none w-full rounded-none focus:outline-none" required
                         />
                     </div>
-                    <button onClick={handleSubmit} className='btn btn-primary rounded-l-none'>Search</button>
+                    <button onClick={handleSubmit} className='hidden md:flex btn btn-primary rounded-l-none'>Search</button>
+
+                    {/* for small device */}
+                    <div className='flex md:hidden p-4 w-full'>
+                        <div className='w-full'>
+                            <input ref={searchRef} name='name' type="text" placeholder="Name" className="input input-bordered bg-white border-none w-full rounded-none focus:outline-none" required
+                            />
+                        </div>
+                        <button onClick={handleSubmit} className='btn btn-primary rounded-l-none'>Search</button>
+                    </div>
                 </div>
             </div>
             <div className='mt-[30px] place-items-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] mx-auto'>

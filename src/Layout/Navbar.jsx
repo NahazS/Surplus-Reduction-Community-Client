@@ -24,6 +24,7 @@ const Navbar = () => {
                 <li><NavLink to={'/addFood'}>Add Food</NavLink></li>
                 <li><NavLink to={'/myFood'}>My Food</NavLink></li>
                 <li><NavLink to={'/myFoodRequest'}>My Food Request</NavLink></li>
+                <li><NavLink to={'/signIn'}>Sign In</NavLink></li>
             </ul>
             <div className="flex items-center gap-x-3">
                 <Link to={!user && '/signIn'} onClick={handleSignOut} className="hidden sm:flex px-4 btn bg-primary text-white hover:shadow-xl active:shadow-inner">{user ? 'Sign Out' : 'Sign in'}</Link>
