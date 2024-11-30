@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import UpdateMyFoodCard from '../../Card/UpdateMyFoodCard';
+import axios from 'axios';
 
 const MyFood = () => {
     const {user} = useContext(AuthContext)
@@ -10,6 +11,9 @@ const MyFood = () => {
         .then(res => res.json())
         .then(data => setAddedFood(data))
     },[])
+    const handleDelete = (id) => {
+        axios.delete(`http://localhost:3000/availableFood/${id}`)
+    }
     return (
         <div>
             <div className='px-5 xl:px-0 max-w-[1140px] mx-auto'>
@@ -26,7 +30,7 @@ const MyFood = () => {
                         </thead>
                         <tbody>
                             {
-                                addedFood.map(food => <UpdateMyFoodCard key={food._id} food={food}></UpdateMyFoodCard>)
+                                addedFood.map(food => <UpdateMyFoodCard key={food._id} food={food} handleDelete={handleDelete}></UpdateMyFoodCard>)
                             }
                         </tbody>
                     </table>
