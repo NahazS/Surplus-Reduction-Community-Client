@@ -6,9 +6,9 @@ const FoodCard = ({food}) => {
     const {foodName, foodImage, quantity, location, expDate, status, notes, donatorName, donatorPhoto, _id} = food
     return (
         <div className='group overflow-hidden cursor-pointer'>
-        <div className="w-fit sm:w-[350px] mx-auto rounded-xl shadow-md bg-[#f2f7fd] p-6 border border-gray-200">
+        <div className="w-[270px] h-[500px] sm:w-[350px] mx-auto rounded-xl shadow-md bg-[#f2f7fd] p-6 border border-gray-200">
           <div className="relative overflow-hidden rounded-lg h-48 mb-4">
-            <img className="w-full h-full object-contain transform transition-transform duration-300 group-hover:scale-110" src={foodImage} alt="Food Image" />
+            <img className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110" src={foodImage} alt="Food Image" />
             <span className="absolute top-2 left-2 bg-[#404680] text-white font-medium px-3 py-1 rounded-full text-xs shadow-md">{status}</span>
           </div>
 
