@@ -7,13 +7,18 @@ import { motion, useScroll } from "framer-motion";
 import SignIn from '../Pages/Login/SignIn';
 import Swal from 'sweetalert2'
 const FullDetailsFoodCard = () => {
+    const [disableRequest, setDisableRequest] = useState(false)
     const {id} = useParams()
     const navigate = useNavigate()
     const { scrollYProgress } = useScroll();
     const item = useLoaderData()
     const {user} = useContext(AuthContext)
     const {donatorName, donatorEmail, foodName, foodImage, quantity, location, expDate, status} = item
-
+    useEffect(() => {
+        if (user.email === donatorEmail) {
+            setDisableRequest(true);
+        }
+    }, [user.email, donatorEmail]);
     const handleRequest = (e) => {
         e.preventDefault()
         const notes = e.target.notes.value
@@ -144,7 +149,7 @@ const FullDetailsFoodCard = () => {
                           />
                         </div>
                         <div className="form-control mt-6">
-                          <button className="btn bg-primary text-white hover:text-black">Place Request</button>
+                          <button disabled={disableRequest} className="btn bg-primary text-white hover:text-black">Place Request</button>
                         </div>
                       </form>
                     </div>
