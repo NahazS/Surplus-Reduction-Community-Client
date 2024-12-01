@@ -1,41 +1,67 @@
-import React, { useRef, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
 import FoodCard from '../../Card/FoodCard';
 import Loading from '../Loading/Loading';
 import { Helmet } from 'react-helmet';
 
 const AvailableFoods = () => {
-    const allFood = useLoaderData()
-    const [showFood, setShowFood] = useState(allFood)
+
+    // pagination 
+    const [allFood, setAllFood] = useState([])
+    const [showFood, setShowFood] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalPages, setTotalPages] = useState(1)
+    const limit = 6
+
+    const fetchData = async (page = 1) => {
+        const res = await fetch(`https://food-sharing-community-server-theta.vercel.app/availableFood?page=${page}&limit=${limit}`);
+        const data = await res.json();
+        setAllFood(data.data);
+        setShowFood(data.data);
+        console.log(data)
+        setCurrentPage(data.currentPage);
+        setTotalPages(data.totalPages);
+    };
+    useEffect(()=> {
+        fetchData(currentPage)
+    },[currentPage])
+
+    const handlePageChange = (page) => {
+        if(page >= 1 && page <= totalPages)
+        {
+            setCurrentPage(page)
+        }
+    }
+
+
     const searchRef = useRef(null)
-    const sortRef = useRef()
-    const handleSubmit = (e) => {
+    const handleSearch = async (e) => {
         e.preventDefault()
         const search = searchRef.current.value
-        console.log(search)
         if(search)
         {
-            fetch(`https://food-sharing-community-server-theta.vercel.app/availableFood?foodName=${search}`)
-            .then(res => res.json())
-            .then(data => setShowFood(data))
+            const res = await fetch(`https://food-sharing-community-server-theta.vercel.app/availableFood?foodName=${search}`)
+            const data = await res.json()
+            setShowFood(data)
+            console.log(data)
         } else{
             setShowFood(allFood)
         }
     }
-    if(!showFood){
-        return <Loading></Loading>
-    }
+    const sortRef = useRef()
     const handleSort = () => {
         const sortType = sortRef.current.value
-        let sort = []
+        let sorted = []
         if(sortType === "Expire Date")
         {
-            sort = [...showFood].sort((food1,food2) => new Date(food1.expDate) - new Date(food2.expDate))
+            sorted = [...showFood].sort((food1,food2) => new Date(food1.expDate) - new Date(food2.expDate))
         }
         else {
-            sort = [...showFood].sort((food1,food2) => new Date(food1.addedTime) - new Date(food2.addedTime))
+            sorted = [...showFood].sort((food1,food2) => new Date(food1.addedTime) - new Date(food2.addedTime))
         }
-        setShowFood(sort)
+        setShowFood(sorted)
+    }
+    if(!allFood || allFood.length === 0){
+        return <Loading></Loading>
     }
     return (
         <div className='min-h-screen px-5 xl:px-0 max-w-[1140px] mx-auto mb-[148px]'>
@@ -60,22 +86,31 @@ const AvailableFoods = () => {
                         <input ref={searchRef} name='name' type="text" placeholder="Name" className="input input-bordered bg-white border-none w-full rounded-none focus:outline-none" required
                         />
                     </div>
-                    <button onClick={handleSubmit} className='hidden md:flex btn btn-primary rounded-l-none'>Search</button>
+                    <button onClick={handleSearch} className='hidden md:flex btn btn-primary rounded-l-none'>Search</button>
 
                     {/* for small device */}
-                    <div className='flex md:hidden p-4 w-full'>
+                    {/* <div className='flex md:hidden p-4 w-full'>
                         <div className='w-full'>
                             <input ref={searchRef} name='name' type="text" placeholder="Name" className="input input-bordered bg-white border-none w-full rounded-none focus:outline-none" required
                             />
                         </div>
-                        <button onClick={handleSubmit} className='btn btn-primary rounded-l-none'>Search</button>
-                    </div>
+                        <button onClick={handleSearch} className='btn btn-primary rounded-l-none'>Search</button>
+                    </div> */}
                 </div>
             </div>
             <div className='mt-[30px] place-items-center items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] mx-auto'>
                 {
                     showFood.map(food => <FoodCard key={food._id} food={food}></FoodCard>)
                 }
+            </div>
+            <div className="flex justify-center mt-5 gap-2">
+                <button className="btn" disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}>Previous</button>
+                {[...Array(totalPages)].map((_, index) => (
+                    <button key={index} className={`btn ${currentPage === index + 1 ? 'btn-primary' : ''}`} onClick={() => handlePageChange(index + 1)}>
+                        {index + 1}
+                    </button>
+                ))}
+                <button className="btn" disabled={currentPage === totalPages} onClick={() => handlePageChange(currentPage + 1)}>Next</button>
             </div>
         </div>
     );

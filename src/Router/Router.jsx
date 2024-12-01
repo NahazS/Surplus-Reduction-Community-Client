@@ -22,7 +22,7 @@ const Router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: () => fetch('https://food-sharing-community-server-theta.vercel.app/availableFood'),
+                loader: () => fetch('https://food-sharing-community-server-theta.vercel.app/availableFood?limit=7'),
                 errorElement: <Error></Error>
             },
             {
