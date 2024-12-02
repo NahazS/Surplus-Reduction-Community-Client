@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const UpdateMyFoodCard = ({food, handleDelete}) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const {_id,donatorName, donatorEmail, donatorPhoto, foodName, foodImage, quantity, location, expDate, status, notes, addedTime} = food
   const handleDeleteClick = () => {
     handleDelete(_id)

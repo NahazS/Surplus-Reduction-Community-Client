@@ -12,6 +12,7 @@ const MyFood = () => {
     const [error, setError] = useState(null);
     const [addedFood, setAddedFood] = useState(null)
     useEffect(() => {
+        window.scrollTo(0, 0);
         fetch(`https://food-sharing-community-server-theta.vercel.app/availableFood?donatorEmail=${user.email}`, {credentials: 'include'})
         .then(res => res.json())
         .then(data => {
@@ -69,7 +70,7 @@ const MyFood = () => {
               <title>EcoUnity | My Food</title>
               <link rel="canonical" href="http://mysite.com/example" />
             </Helmet>
-            <div className='text-center bg-[#f3f7fc] shadow-lg w-full md:h-[200px] flex flex-col items-center justify-center rounded-[16px] mt-[30px]'>
+            <div className='text-center bg-[#f3f7fc] shadow-lg w-full h-[100px] md:h-[200px] flex flex-col items-center justify-center rounded-[16px] mt-[30px]'>
                 <h1 className="text-[#575d90] text-[40px] font-bold">My Food</h1>
             </div>
             <div className='px-5 xl:px-0 max-w-[1140px] mx-auto'>

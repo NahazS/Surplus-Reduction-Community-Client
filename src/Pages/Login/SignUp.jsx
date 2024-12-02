@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FiEyeOff, FiEye } from "react-icons/fi";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { Link } from 'react-router-dom';
@@ -7,6 +7,9 @@ import { updateProfile } from 'firebase/auth';
 import auth from '../../Firebase/firebase.config';
 import { Helmet } from 'react-helmet';
 const SignUp = () => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
     const {user, setUser, signUpUser, signInGoogle, signInGithub,loading} = useContext(AuthContext)
     const handleSubmit = (e) => {
         e.preventDefault()

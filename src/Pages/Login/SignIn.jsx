@@ -1,10 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiEyeOff, FiEye } from "react-icons/fi";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { AuthContext } from '../../Provider/AuthProvider';
 import { Helmet } from 'react-helmet';
 const SignIn = () => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
     const navigate = useNavigate()
     const location = useLocation()
     const {user, setUser, signInUser, signOutUser, signInGoogle, signInGithub, loading} = useContext(AuthContext)

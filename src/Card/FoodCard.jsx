@@ -1,15 +1,21 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import Loading from '../Pages/Loading/Loading';
 
 const FoodCard = ({food}) => {
+    const {user, loading} = useContext(AuthContext)
+    if(loading)
+    {
+      return <Loading></Loading>
+    }
     const {foodName, foodImage, quantity, location, expDate, status, notes, donatorName, donatorPhoto, _id} = food
     return (
         <div className='group overflow-hidden cursor-pointer'>
-        <div className="w-[270px] h-[500px] sm:w-[350px] mx-auto rounded-xl shadow-md bg-[#f2f7fd] p-6 border border-gray-200">
+        <div className=" h-[500px] w-[300px] sm:w-[350px] mx-auto rounded-xl shadow-md bg-[#f2f7fd] p-6 border border-gray-200">
           <div className="relative overflow-hidden rounded-lg h-48 mb-4">
             <img className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-110" src={foodImage} alt="Food Image" />
-            <span className="absolute top-2 left-2 bg-[#404680] text-white font-medium px-3 py-1 rounded-full text-xs shadow-md">{status}</span>
+            <span className={`absolute top-2 left-2 ${status === 'available' ? 'bg-[#404680]' : 'bg-red-500'} text-white font-medium px-3 py-1 rounded-full text-xs shadow-md`}>{status}</span>
           </div>
 
           <div>
@@ -30,9 +36,9 @@ const FoodCard = ({food}) => {
             </div>
 
             <div className="text-center">
-              <Link to={`/availableFood/${_id}`}><button disabled={status !== 'available'} className="w-full bg-[#404680] hover:bg-[#323464] text-white font-medium py-2 px-4 rounded-lg shadow-md transition">
+              <NavLink to={`${user ? `/availableFood/${_id}` : '/signIn'}`}><button  className="w-full bg-[#404680] hover:bg-[#323464] text-white font-medium py-2 px-4 rounded-lg shadow-md transition">
                 View Details
-              </button></Link>
+              </button></NavLink>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import axios from 'axios';
 import moment from 'moment';
@@ -6,6 +6,9 @@ import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 const AddFood = () => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
     const navigate = useNavigate()
     const {user, loading} = useContext(AuthContext)
     const [foodName, setFoodName] = useState('Food Name')
@@ -130,7 +133,7 @@ const AddFood = () => {
                     <div className="min-w-[350px] h-fit mx-auto rounded-xl shadow-md bg-[#f2f7fd] p-6 border border-gray-200">
                       <div className="relative overflow-hidden rounded-lg h-48 mb-4">
                         <img className="w-full h-full object-cover" src={foodImage}  alt="Food Image" />
-                        <span className="absolute top-2 left-2 bg-[#404680] text-white font-medium px-3 py-1 rounded-full text-xs shadow-md">{status}</span>
+                        <span className={`absolute top-2 left-2 ${status === 'available' ? 'bg-[#404680]' : 'bg-red-500'} text-white font-medium px-3 py-1 rounded-full text-xs shadow-md`}>{status}</span>
                       </div>
 
                       <div>

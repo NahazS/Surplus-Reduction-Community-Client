@@ -15,9 +15,10 @@ const FullDetailsFoodCard = () => {
     const {user} = useContext(AuthContext)
     const {donatorName, donatorEmail, foodName, foodImage, quantity, location, expDate, status} = item
     useEffect(() => {
-        if (user.email === donatorEmail) {
-            setDisableRequest(true);
-        }
+      window.scrollTo(0, 0);
+      if (user.email === donatorEmail) {
+          setDisableRequest(true);
+      }
     }, [user.email, donatorEmail]);
     const handleRequest = (e) => {
         e.preventDefault()
@@ -56,36 +57,36 @@ const FullDetailsFoodCard = () => {
     return (
         <div className="group overflow-hidden cursor-pointer w-full md:w-[650px] px-5 md:px-0 mx-auto my-[100px]">
           <div className="rounded-xl shadow-md bg-[#f2f7fd] p-6 border border-gray-200 ">
-            <div className="relative overflow-hidden rounded-lg h-48 mb-4">
+            <div className="relative overflow-hidden h-48 mb-4 flex justify-center">
               <img
-                className="w-full h-full object-contain transform transition-transform duration-300 group-hover:scale-110"
+                className="w-[100%] h-full object-cover rounded-lg transform transition-transform duration-300 group-hover:scale-110"
                 src={foodImage}
                 alt="Food Image"
               />
-              <span className="absolute top-2 left-2 bg-[#404680] text-white font-medium px-3 py-1 rounded-full text-xs shadow-md">
+              <span className={`absolute top-2 left-2 ${status === 'available' ? 'bg-[#404680]' : 'bg-red-500'} text-white font-medium px-3 py-1 rounded-full text-xs shadow-md`}>
                 {status}
               </span>
             </div>
 
-            <div className="flex flex-col sm:flex-row sm:gap-6 items-center justify-between">
-              <div className="p-6 border-b border-gray-200 text-center md:text-left w-1/2">
-                  <h2 className="text-[24px] font-bold text-[#404680] mb-4">Donor Information</h2>
+            <div className="flex flex-row sm:gap-6 items-center justify-between">
+              <div className="p-6 border-b border-gray-200 text-left w-1/2">
+                  <h2 className="text-[20px] sm:text-[24px] font-bold text-[#404680] mb-4">Donor Information</h2>
                   <div className="text-lg text-[#404680] space-y-2 mb-4">
-                    <p><span className="font-semibold">Donar Name:</span> {donatorName}</p>
-                    <p><span className="font-semibold">Food Pickup Location:</span> {location} servings</p>
+                    <p className='flex flex-col sm:flex-row'><span className="font-semibold">Donar Name:</span> {donatorName}</p>
+                    <p className='flex flex-col'><span className="font-semibold">Food Pickup Location:</span> {location} servings</p>
                   </div>
               </div>
 
               <div className="flex-1 w-1/2">
-                <h2 className="text-[24px] font-bold text-[#404680] mb-4">Food Details</h2>
+                <h2 className="text-[20px] sm:text-[24px] font-bold text-[#404680] mb-4">Food Details</h2>
                 <div className="text-lg text-[#404680] space-y-2 mb-4">
-                  <p><span className="font-semibold">Food Name:</span> {foodName}</p>
-                  <p><span className="font-semibold">Serves:</span> {quantity} servings</p>
-                  <p><span className="font-semibold">Expires:</span> {expDate}</p>
+                  <p className='flex flex-col sm:flex-row'><span className="font-semibold">Food Name:</span> {foodName}</p>
+                  <p className='flex flex-col sm:flex-row'><span className="font-semibold">Serves:</span> {quantity} servings</p>
+                  <p className='flex flex-col sm:flex-row'><span className="font-semibold">Expires:</span> {expDate}</p>
                 </div>
               </div>
             </div>
-            <button className="w-full bg-[#404680] hover:bg-[#323464] text-white font-medium py-2 px-4 rounded-lg shadow-md transition" onClick={()=>document.getElementById('my_modal_2').showModal()}>  Request Food</button>
+            <button disabled={status !== "available"} className="w-full bg-[#404680] hover:bg-[#323464] text-white font-medium py-2 px-4 rounded-lg shadow-md transition" onClick={()=>document.getElementById('my_modal_2').showModal()}>{status === "available" ? 'Request Food' : 'Not Available' }</button>
             <dialog id="my_modal_2" className="modal" onClick={(e) => { if (e.target === document.getElementById('my_modal_2')) document.getElementById('my_modal_2').close() }}>
             <div className="hero-content mx-auto">
                     <div className="card bg-[#f2f7fd] w-full sm:w-[711px] h-[700px] overflow-scroll px-[30px] py-[15px] md:py-[35px] md:px-[65px] shrink-0 rounded-xl text-center">

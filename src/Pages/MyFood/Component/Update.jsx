@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
 import moment from 'moment';
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 const Update = () => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
     const food = useLoaderData()
     const navigate = useNavigate()
     const {_id,donatorName, donatorEmail, donatorPhoto, foodName, foodImage, quantity, location, expDate, status, notes, addedTime} = food
@@ -44,9 +47,9 @@ const Update = () => {
         })
     }
     return (
-        <div>
+        <div className="px-5 xl:px-0 max-w-[1140px] mx-auto">
             <div className="hero-content mx-auto pl-0">
-                <div className="card bg-[#f2f7fd] w-full sm:w-[711px] h-[700px] px-[30px] py-[15px] md:py-[35px] md:px-[65px] shrink-0 rounded-xl text-center overflow-auto">
+                <div className="card bg-[#f2f7fd] w-full md:w-[711px] h-fit px-[30px] py-[15px] md:py-[35px] md:px-[65px] shrink-0 rounded-xl text-center overflow-auto">
                     <h1 className="text-primary text-[40px] font-bold mb-[30px]">Update Food</h1>
                     <form onSubmit={handleSubmit}>
                       <div className="form-control flex flex-col sm:flex-row gap-4">
